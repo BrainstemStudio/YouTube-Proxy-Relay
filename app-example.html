@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+</head>
+<body style="background:#000" style="margin:0; padding:0">
+
+    <div id="youtube-container" style="height:80vh"></div>
+    
+    <div>
+
+        <button id="play-button">Play/Pause Video</button>
+        <button id="seek-ahead-button">Seek Ahead</button>
+        <button id="seek-back-button">Seek Back</button>
+
+
+    </div>
+
+</body>
+</html>
+<script src="./js/youtube.proxy.class.js"></script>
+
+<script>
+
+    let youtubePlayer = new YouTubeProxy('youtube-container',{
+        videoId  : 'dQw4w9WgXcQ',    // Example video ID
+        proxyURL : './proxy.html', // Should be hosted on server
+
+        /* Origin settings */
+        appOrigin: '*', // Your app domain where your app is hosted
+        webOrigin: '*', // Your web domain where the proxy is hosted
+
+        /* YouTube Player API options */
+        playerVars : {
+                playsinline   : 1,
+                controls      : 0,
+                autoplay      : 1,
+                color         : 'white',
+                modestbranding: 1
+        },
+
+        /* YouTube Player API events */
+        events: {
+            onReady: function(event) {
+                console.log('YouTube Player is ready');
+            },
+            onStateChange: function(event) {
+                console.log('YouTube Player state changed:', event.data);
+
+                playing = event.data === 1;
+
+            },
+            onError: function(event) {
+                console.error('YouTube Player error:', event.data);
+            }
+        }
+    });
+
+    let playing = false;
+
+    document.getElementById('play-button').addEventListener('click', () => {
+
+        if (playing) {
+            youtubePlayer.pauseVideo();
+            playing = false;
+        } else {
+            youtubePlayer.playVideo();
+            playing = true;
+        }
+    });
+
+    document.getElementById('seek-ahead-button').addEventListener('click', () => {
+        youtubePlayer.seekTo(youtubePlayer.getCurrentTime() + 10);
+    });
+
+    document.getElementById('seek-back-button').addEventListener('click', () => {
+        youtubePlayer.seekTo(youtubePlayer.getCurrentTime() - 10);
+    });
+
+</script>
