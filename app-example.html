@@ -25,11 +25,11 @@
 
     let youtubePlayer = new YouTubeProxy('youtube-container',{
         videoId  : 'dQw4w9WgXcQ',    // Example video ID
-        proxyURL : './proxy.html', // Should be hosted on server
+        proxyURL : 'https://your.server.com/proxy.html', // Should be hosted on server
 
         /* Origin settings */
-        appOrigin: '*', // Your app domain where your app is hosted
-        webOrigin: '*', // Your web domain where the proxy is hosted
+        appOrigin: 'ionic://localhost', // Your app domain where your app is hosted
+        webOrigin: 'https://your.server.com', // Your web domain where the proxy is hosted
 
         /* YouTube Player API options */
         playerVars : {

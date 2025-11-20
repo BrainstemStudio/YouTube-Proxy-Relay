@@ -15,7 +15,7 @@ This repository provides two cooperating JavaScript classes:
 - Throttled messaging to reduce chatter
 
 ## How It Works
-1. Your app instantiates `YouTubeProxy` with a `proxyURL` (e.g. `./proxy.html`).
+1. Your app instantiates `YouTubeProxy` with a `proxyURL` (e.g. `https://your.server.com/proxy.html`).
 2. `YouTubeProxy` injects an iframe whose `src` contains a Base64 encoded payload (video + config + allowed origins).
 3. The proxy page (`proxy.html`) loads `YouTubeRelay`, decodes the payload, boots the YouTube IFrame API, and listens for parent commands.
 4. Commands and events flow via `window.postMessage` restricted by the supplied `appOrigin` and `webOrigin`.
@@ -29,9 +29,9 @@ This repository provides two cooperating JavaScript classes:
 <script>
 	const player = new YouTubeProxy('youtube-container', {
 		videoId   : 'dQw4w9WgXcQ',
-		proxyURL  : './proxy.html',
+		proxyURL  : 'https://your.server.com/proxy.html',
 		appOrigin : window.location.origin,   // app domain
-		webOrigin : 'https://your.serverlocation.com', // proxy origin
+		webOrigin : 'https://your.server.com', // proxy origin
 		playerVars: { autoplay: 1, playsinline: 1, controls: 0 },
 		events    : {
 			onReady: e => console.log('Ready', e),
