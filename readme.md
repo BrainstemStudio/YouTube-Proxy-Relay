@@ -28,7 +28,7 @@ This repository provides two cooperating JavaScript classes:
 <script src="./js/youtube.proxy.class.js"></script>
 <script>
 	const player = new YouTubeProxy('youtube-container', {
-		videoId   : 'dQw4w9WgXcQ',
+		videoId   : 'aqz-KE-bpKQ',
 		proxyURL  : 'https://your.server.com/proxy.html',
 		appOrigin : window.location.origin,   // app domain
 		webOrigin : 'https://your.server.com', // proxy origin
